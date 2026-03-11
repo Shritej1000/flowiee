@@ -222,21 +222,29 @@
                         </div>
                     </div>
                     <div class="glass-pill p-10 rounded-2xl w-full relative overflow-hidden">
-                        <form class="space-y-8 relative z-10">
+                        <form action="https://formsubmit.co/shritejpatil2806@gmail.com" method="POST"
+                            class="space-y-8 relative z-10">
+                            <!-- FormSubmit Config -->
+                            <!-- To prevent spam/captcha from breaking the flow immediately, you can tune these configurations -->
+                            <input type="hidden" name="_subject" value="New Inquiry from Flowiee Website!">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" value="https://shritejpatil2806.github.io/thank-you.html">
+                            <!-- Alternatively, can remove if you don't have a thank you page -->
+
                             <div class="grid grid-cols-2 gap-6">
                                 <div class="space-y-3">
                                     <label class="text-xs uppercase tracking-widest text-forest/80 font-bold"
                                         for="first-name">First Name</label>
                                     <input
                                         class="w-full bg-white/40 border-0 rounded-xl px-5 py-4 text-forest focus:outline-none focus:ring-2 focus:ring-forest/30 transition-shadow placeholder:text-forest/30"
-                                        id="first-name" type="text" placeholder="John" />
+                                        id="first-name" name="First Name" type="text" placeholder="John" required />
                                 </div>
                                 <div class="space-y-3">
                                     <label class="text-xs uppercase tracking-widest text-forest/80 font-bold"
                                         for="last-name">Last Name</label>
                                     <input
                                         class="w-full bg-white/40 border-0 rounded-xl px-5 py-4 text-forest focus:outline-none focus:ring-2 focus:ring-forest/30 transition-shadow placeholder:text-forest/30"
-                                        id="last-name" type="text" placeholder="Doe" />
+                                        id="last-name" name="Last Name" type="text" placeholder="Doe" required />
                                 </div>
                             </div>
                             <div class="space-y-3">
@@ -244,18 +252,19 @@
                                     for="email">Email Address</label>
                                 <input
                                     class="w-full bg-white/40 border-0 rounded-xl px-5 py-4 text-forest focus:outline-none focus:ring-2 focus:ring-forest/30 transition-shadow placeholder:text-forest/30"
-                                    id="email" type="email" placeholder="john@example.com" />
+                                    id="email" name="Email" type="email" placeholder="john@example.com" required />
                             </div>
                             <div class="space-y-3">
                                 <label class="text-xs uppercase tracking-widest text-forest/80 font-bold"
                                     for="message">Your Message</label>
                                 <textarea
                                     class="w-full bg-white/40 border-0 rounded-xl px-5 py-4 text-forest focus:outline-none focus:ring-2 focus:ring-forest/30 transition-shadow h-32 resize-none placeholder:text-forest/30"
-                                    id="message" placeholder="Tell us about what you want to create..."></textarea>
+                                    id="message" name="Message" placeholder="Tell us about what you want to create..."
+                                    required></textarea>
                             </div>
                             <button
-                                class="liquid-button w-full text-off-white px-8 py-5 rounded-xl text-sm uppercase tracking-widest font-bold mt-2 hover:shadow-xl"
-                                type="button">
+                                class="liquid-button w-full text-off-white px-8 py-5 rounded-xl text-sm uppercase tracking-widest font-bold mt-2 hover:shadow-xl cursor-pointer"
+                                type="submit">
                                 Send Inquiry
                             </button>
                         </form>
