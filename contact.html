@@ -222,15 +222,28 @@
                         </div>
                     </div>
                     <div class="glass-pill p-10 rounded-2xl w-full relative overflow-hidden">
-                        <form action="https://formsubmit.co/shritejpatil2806@gmail.com" method="POST"
+                        <div id="form-success"
+                            class="hidden absolute top-0 left-0 w-full h-full bg-[#E4DBC4]/90 backdrop-blur-xl flex flex-col items-center justify-center text-center p-8 z-20 transition-all duration-500 rounded-2xl">
+                            <div class="w-16 h-16 rounded-full bg-forest flex items-center justify-center mb-6">
+                                <svg class="w-8 h-8 text-off-white" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-3xl font-serif text-forest mb-4">Inquiry Submitted</h3>
+                            <p class="text-forest/70 max-w-xs">Thank you for reaching out! Your response has been sent
+                                securely, and we will get back to you shortly.</p>
+                            <button id="close-success" type="button"
+                                class="mt-8 text-forest uppercase tracking-widest text-xs font-bold border-b border-forest/30 hover:border-forest transition-colors pb-1 cursor-pointer">Send
+                                Another</button>
+                        </div>
+                        <form id="contactForm" action="https://formsubmit.co/shritejpatil2806@gmail.com" method="POST"
                             class="space-y-8 relative z-10">
                             <!-- FormSubmit Config -->
                             <!-- To prevent spam/captcha from breaking the flow immediately, you can tune these configurations -->
                             <input type="hidden" name="_subject" value="New Inquiry from Flowiee Website!">
                             <input type="hidden" name="_captcha" value="false">
-                            <input type="hidden" name="_next" value="https://shritejpatil2806.github.io/thank-you.html">
-                            <!-- Alternatively, can remove if you don't have a thank you page -->
-
                             <div class="grid grid-cols-2 gap-6">
                                 <div class="space-y-3">
                                     <label class="text-xs uppercase tracking-widest text-forest/80 font-bold"
@@ -264,7 +277,7 @@
                             </div>
                             <button
                                 class="liquid-button w-full text-off-white px-8 py-5 rounded-xl text-sm uppercase tracking-widest font-bold mt-2 hover:shadow-xl cursor-pointer"
-                                type="submit">
+                                type="submit" id="submitBtn">
                                 Send Inquiry
                             </button>
                         </form>
@@ -430,6 +443,70 @@
                 duration: 1,
                 ease: "power3.out"
             });
+
+            // Form AJAX Submission
+            const contactForm = document.getElementById('contactForm');
+            const formSuccess = document.getElementById('form-success');
+            const submitBtn = document.getElementById('submitBtn');
+            const closeSuccessBtn = document.getElementById('close-success');
+
+            if (contactForm && formSuccess && submitBtn) {
+                contactForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // Visual feedback
+                    const originalText = submitBtn.innerText;
+                    submitBtn.innerText = "Sending...";
+                    submitBtn.style.pointerEvents = 'none';
+                    submitBtn.style.opacity = '0.7';
+
+                    const formData = new FormData(contactForm);
+
+                    fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                // Show success screen
+                                contactForm.reset();
+                                formSuccess.classList.remove('hidden');
+
+                                // Animate it in
+                                gsap.from(formSuccess, {
+                                    opacity: 0,
+                                    scale: 0.95,
+                                    duration: 0.5,
+                                    ease: "power2.out"
+                                });
+                            } else {
+                                alert("Oops! There was a problem submitting your form. Please try again.");
+                            }
+                        })
+                        .catch(error => {
+                            alert("Oops! There was a network problem. Please try again.");
+                        })
+                        .finally(() => {
+                            submitBtn.innerText = originalText;
+                            submitBtn.style.pointerEvents = 'auto';
+                            submitBtn.style.opacity = '1';
+                        });
+                });
+
+                closeSuccessBtn.addEventListener('click', () => {
+                    gsap.to(formSuccess, {
+                        opacity: 0,
+                        duration: 0.3,
+                        onComplete: () => {
+                            formSuccess.classList.add('hidden');
+                            formSuccess.style.opacity = '';
+                        }
+                    });
+                });
+            }
         });
     </script>
     <!-- END: Scripts -->
