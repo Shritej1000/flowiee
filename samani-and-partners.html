@@ -4,8 +4,33 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Samani & Partners | Flowiee</title>
+    <title>Samani & Partners | Architecture Portfolio | Flowiee</title>
+    <meta name="description" content="A showcase of architectural mastery for Samani & Partners. Explore how Flowiee created a digital space mirroring their visionary spatial design philosophy." />
+    <meta name="keywords" content="Architecture Portfolio, Samani & Partners, Flowiee Case Study, Premium Web Design" />
+    <link rel="canonical" href="https://flowiee.com/samani-and-partners" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flowiee.com/samani-and-partners" />
+    <meta property="og:title" content="Samani & Partners | Architecture Portfolio | Flowiee" />
+    <meta property="og:description" content="Explore how Flowiee created a digital space mirroring Samani & Partners' visionary spatial design philosophy." />
+    <meta property="og:image" content="https://flowiee.com/S&P.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://flowiee.com/samani-and-partners" />
+    <meta property="twitter:title" content="Samani & Partners | Architecture Portfolio | Flowiee" />
+    <meta property="twitter:description" content="Explore how Flowiee created a digital space mirroring Samani & Partners' visionary spatial design philosophy." />
+    <meta property="twitter:image" content="https://flowiee.com/S&P.png" />
+
+    <!-- Performance & Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+
     <link rel="icon" type="image/png" href="logo.png" />
+
     <!-- Tailwind CSS with Plugins -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <!-- GSAP & Three.js for Flow Effect -->
@@ -107,7 +132,32 @@
             padding-bottom: 8rem;
         }
     </style>
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://flowiee.com/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Work",
+        "item": "https://flowiee.com/portfolio"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Samani & Partners",
+        "item": "https://flowiee.com/samani-and-partners"
+      }]
+    }
+    </script>
 </head>
+
 
 <body class="antialiased">
     <!-- BEGIN: Flow Background Canvas -->
@@ -177,7 +227,8 @@
         <!-- Project Image -->
         <section class="container mx-auto px-6 mb-20 section-fade-in">
             <div class="w-full aspect-[21/9] overflow-hidden rounded-2xl shadow-2xl relative">
-                <img alt="Samani & Partners Showcase" class="object-cover w-full h-full" src="S&P.png" />
+                <img alt="Samani & Partners Architectural Showcase" class="object-cover w-full h-full" src="S&P.png" loading="lazy" width="1200" height="600" />
+
                 <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
             </div>
         </section>
