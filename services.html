@@ -48,10 +48,10 @@
             theme: {
                 extend: {
                     colors: {
-                        'forest': '#18442A',
-                        'sage': '#45644A',
-                        'cream': '#E4DBC4',
-                        'off-white': '#F3EDE3',
+                        'forest': 'rgb(var(--color-forest) / <alpha-value>)',
+                        'sage': 'rgb(var(--color-sage) / <alpha-value>)',
+                        'cream': 'rgb(var(--color-cream) / <alpha-value>)',
+                        'off-white': 'rgb(var(--color-off-white) / <alpha-value>)',
                     },
                     fontFamily: {
                         'serif': ['"Playfair Display"', 'serif'],
@@ -62,11 +62,34 @@
         }
     </script>
     <style data-purpose="base-typography">
+        :root {
+            --color-forest: 24 68 42;    /* #18442A */
+            --color-sage: 69 100 74;     /* #45644A */
+            --color-cream: 228 219 196;  /* #E4DBC4 */
+            --color-off-white: 243 237 227; /* #F3EDE3 */
+            --color-bg: #F3EDE3;
+            --color-text: #18442A;
+        }
+
+        :root.dark-theme {
+            --color-forest: 185 46 255;  /* #B92EFF */
+            --color-sage: 180 113 219;   /* #B471DB */
+            --color-cream: 26 26 26;     /* #1A1A1A */
+            --color-off-white: 243 237 227; /* #F3EDE3 */
+            --color-bg: #0a0a0a;
+            --color-text: #FFFFFF;
+        }
+
+        :root.dark-theme header img[alt="Flowiee Logo"] {
+            filter: brightness(0) invert(1);
+        }
+
         body {
-            background-color: #F3EDE3;
-            color: #18442A;
+            background-color: var(--color-bg);
+            color: var(--color-text);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
 
         h1,
@@ -83,21 +106,30 @@
             backdrop-filter: blur(12px) saturate(180%);
             -webkit-backdrop-filter: blur(12px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px 0 rgba(24, 68, 42, 0.05);
+            box-shadow: 0 8px 32px 0 rgb(var(--color-forest) / 0.05);
+            transition: background 0.5s, border 0.5s;
+        }
+        
+        :root.dark-theme .glass-pill {
+            background: rgba(26, 26, 26, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .liquid-button {
-            background: rgba(24, 68, 42, 0.9);
+            background: rgb(var(--color-forest) / 0.9);
             backdrop-filter: blur(8px);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             overflow: hidden;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .liquid-button:hover {
-            background: rgba(24, 68, 42, 1);
+            background: rgb(var(--color-forest) / 1);
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(24, 68, 42, 0.15);
+            box-shadow: 0 10px 20px rgb(var(--color-forest) / 0.15);
         }
 
         .liquid-button::after {
@@ -107,13 +139,37 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(228, 219, 196, 0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgb(var(--color-cream) / 0.2) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.5s;
         }
 
         .liquid-button:hover::after {
             opacity: 1;
+        }
+
+        /* Modern Letters Reveal on Hover */
+        .char-wrap {
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            vertical-align: top;
+        }
+        
+        .char {
+            display: inline-block;
+            transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+        
+        .char.clone {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: currentColor;
+        }
+
+        a:hover .char, button:hover .char {
+            transform: translateY(-100%);
         }
     </style>
     <style data-purpose="layout-utilities">
@@ -209,6 +265,11 @@
         ]
       }
     }
+    </script>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark-theme');
+        }
     </script>
 </head>
 
@@ -523,7 +584,7 @@
         // Plane Geometry for Waves
         const geometry = new THREE.PlaneGeometry(10, 10, 64, 64);
         const material = new THREE.MeshStandardMaterial({
-            color: 0x45644A,
+            color: document.documentElement.classList.contains('dark-theme') ? 0xB92EFF : 0x45644A,
             wireframe: false,
             transparent: true,
             opacity: 0.15,
@@ -593,6 +654,44 @@
     <script data-purpose="scroll-animations">
         // Simple Entrance Animations with GSAP
         document.addEventListener('DOMContentLoaded', () => {
+            // Apply text reveal animation to buttons
+            document.querySelectorAll('a.rounded-full').forEach(btn => {
+                const originalText = btn.innerText.trim();
+                btn.innerHTML = '';
+                
+                const content = document.createElement('div');
+                content.className = 'relative flex items-center justify-center overflow-hidden w-full';
+                
+                const words = originalText.split(/\s+/);
+                words.forEach((word, wordIndex) => {
+                    const wordSpan = document.createElement('span');
+                    wordSpan.style.display = 'inline-flex';
+                    wordSpan.style.marginRight = wordIndex < words.length - 1 ? '0.3em' : '0';
+                    
+                    word.split('').forEach((char, charIndex) => {
+                        const charWrap = document.createElement('span');
+                        charWrap.className = 'char-wrap';
+                        
+                        const charOriginal = document.createElement('span');
+                        charOriginal.className = 'char';
+                        charOriginal.innerHTML = (char === ' ') ? '&nbsp;' : char;
+                        charOriginal.style.transitionDelay = `${(wordIndex * 0.1) + (charIndex * 0.03)}s`;
+                        
+                        const charClone = document.createElement('span');
+                        charClone.className = 'char clone';
+                        charClone.innerHTML = (char === ' ') ? '&nbsp;' : char;
+                        charClone.style.transitionDelay = `${(wordIndex * 0.1) + (charIndex * 0.03)}s`;
+                        
+                        charWrap.appendChild(charOriginal);
+                        charWrap.appendChild(charClone);
+                        wordSpan.appendChild(charWrap);
+                    });
+                    
+                    content.appendChild(wordSpan);
+                });
+                btn.appendChild(content);
+            });
+
             // Mobile Menu Toggle
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');

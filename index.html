@@ -77,12 +77,12 @@
         }
 
         :root.dark-theme {
-            --color-forest: 102 0 153;   /* #660099 */
+            --color-forest: 185 46 255;  /* #B92EFF */
             --color-sage: 180 113 219;   /* #B471DB */
             --color-cream: 26 26 26;     /* #1A1A1A */
             --color-off-white: 243 237 227; /* #F3EDE3 */
             --color-bg: #0a0a0a;
-            --color-text: #F3EDE3;
+            --color-text: #FFFFFF;
         }
 
         :root.dark-theme header img[alt="Flowiee Logo"] {
@@ -177,6 +177,11 @@
             transform: translateY(-100%);
         }
     </style>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark-theme');
+        }
+    </script>
     <style data-purpose="layout-utilities">
         #flow-canvas {
             position: fixed;
@@ -599,7 +604,7 @@
         // Plane Geometry for Waves
         const geometry = new THREE.PlaneGeometry(10, 10, 64, 64);
         const material = new THREE.MeshStandardMaterial({
-            color: document.documentElement.classList.contains('dark-theme') ? 0x660099 : 0x45644A,
+            color: document.documentElement.classList.contains('dark-theme') ? 0xB92EFF : 0x45644A,
             wireframe: false,
             transparent: true,
             opacity: 0.15,
@@ -609,13 +614,13 @@
 
         // Listen for theme toggle to change color
         window.addEventListener('themeToggle', (e) => {
-            const targetHex = e.detail.isDark ? 0x660099 : 0x45644A;
+            const targetHex = e.detail.isDark ? 0xB92EFF : 0x45644A;
             const targetColor = new THREE.Color(targetHex);
             gsap.to(material.color, {
                 r: targetColor.r,
                 g: targetColor.g,
                 b: targetColor.b,
-                duration: 1.5,
+                duration: e.detail.immediate ? 0 : 1.5,
                 ease: "power2.inOut"
             });
         });
@@ -754,11 +759,18 @@
             // Theme Toggle Logic
             const themeToggle = document.getElementById('theme-toggle');
             const themeIcon = document.getElementById('theme-icon');
+            
+            if (localStorage.getItem('theme') === 'dark') {
+                if (themeIcon) themeIcon.innerText = '🌞';
+                setTimeout(() => window.dispatchEvent(new CustomEvent('themeToggle', { detail: { isDark: true, immediate: true } })), 10);
+            }
+
             if(themeToggle) {
                 themeToggle.addEventListener('click', () => {
                     document.documentElement.classList.toggle('dark-theme');
                     const isDark = document.documentElement.classList.contains('dark-theme');
                     themeIcon.innerText = isDark ? '🌞' : '🌙';
+                    localStorage.setItem('theme', isDark ? 'dark' : 'light');
                     window.dispatchEvent(new CustomEvent('themeToggle', { detail: { isDark } }));
                 });
             }
