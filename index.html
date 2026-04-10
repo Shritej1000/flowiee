@@ -89,6 +89,16 @@
             background-color: #452452;
         }
 
+        :root.dark-theme footer .social-link,
+        :root.dark-theme footer .text-cream\/30,
+        :root.dark-theme footer .text-cream\/40 {
+            color: rgba(210, 180, 222, 0.4) !important;
+        }
+
+        :root.dark-theme footer .social-link:hover {
+            color: rgba(210, 180, 222, 0.9) !important;
+        }
+
 
         :root.dark-theme header img[alt="Flowiee Logo"] {
             filter: brightness(0) invert(1);
@@ -742,7 +752,7 @@
             }
 
             // Apply text reveal animation to buttons
-            document.querySelectorAll('a.rounded-full, .social-link').forEach(btn => {
+            document.querySelectorAll('a.rounded-full, .liquid-button, .social-link, nav div a, .border-b').forEach(btn => {
                 const originalText = btn.innerText.trim();
                 btn.innerHTML = '';
                 

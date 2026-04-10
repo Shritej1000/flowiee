@@ -83,6 +83,16 @@
             background-color: #452452;
         }
 
+        :root.dark-theme footer .social-link,
+        :root.dark-theme footer .text-cream\/30,
+        :root.dark-theme footer .text-cream\/40 {
+            color: rgba(210, 180, 222, 0.4) !important;
+        }
+
+        :root.dark-theme footer .social-link:hover {
+            color: rgba(210, 180, 222, 0.9) !important;
+        }
+
 
         :root.dark-theme header img[alt="Flowiee Logo"] {
             filter: brightness(0) invert(1);
@@ -352,7 +362,7 @@
                     </div>
 
                     <div
-                        class="relative bg-forest text-off-white rounded-xl p-8 md:p-12 overflow-hidden shadow-2xl mt-12">
+                        class="relative bg-[#CB2EFF] text-off-white rounded-xl p-8 md:p-12 overflow-hidden shadow-2xl mt-12">
                         <!-- Subtle background decoration -->
                         <div class="absolute top-0 right-10 opacity-10 transform -translate-y-8">
                             <h2 class="text-[200px] font-serif leading-none italic">"</h2>
@@ -495,7 +505,7 @@
         // Simple Entrance Animations with GSAP
         document.addEventListener('DOMContentLoaded', () => {
             // Apply text reveal animation to buttons
-            document.querySelectorAll('a.rounded-full, .social-link').forEach(btn => {
+            document.querySelectorAll('a.rounded-full, .liquid-button, .social-link, nav div a, .border-b').forEach(btn => {
                 const originalText = btn.innerText.trim();
                 btn.innerHTML = '';
                 
