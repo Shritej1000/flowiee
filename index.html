@@ -77,13 +77,18 @@
         }
 
         :root.dark-theme {
-            --color-forest: 185 46 255;  /* #B92EFF */
-            --color-sage: 180 113 219;   /* #B471DB */
+            --color-forest: 210 180 222;  /* #D2B4DE */
+            --color-sage: 210 180 222;  /* #D2B4DE */
             --color-cream: 26 26 26;     /* #1A1A1A */
             --color-off-white: 243 237 227; /* #F3EDE3 */
             --color-bg: #0a0a0a;
             --color-text: #FFFFFF;
         }
+
+        :root.dark-theme footer.bg-forest {
+            background-color: #452452;
+        }
+
 
         :root.dark-theme header img[alt="Flowiee Logo"] {
             filter: brightness(0) invert(1);
@@ -102,6 +107,24 @@
         h3,
         .serif-font {
             font-family: 'Playfair Display', serif;
+        }
+    
+        :root.dark-theme .liquid-button {
+            background: rgba(203, 46, 255, 0.9);
+        }
+        :root.dark-theme .liquid-button:hover {
+            background: rgba(203, 46, 255, 1);
+            box-shadow: 0 10px 20px rgba(203, 46, 255, 0.15);
+        }
+        :root.dark-theme .service-card:hover {
+            background-color: #CB2EFF !important;
+        }
+    
+        .carousel-mask-left {
+            background: linear-gradient(to right, var(--color-bg), transparent);
+        }
+        .carousel-mask-right {
+            background: linear-gradient(to left, var(--color-bg), transparent);
         }
     </style>
     <style data-purpose="glassmorphism">
@@ -375,7 +398,7 @@
                 <div class="grid md:grid-cols-3 gap-8 mb-24">
                     <!-- Service 1: UI/UX -->
                     <a href="services.html#service-ui-ux"
-                        class="glass-pill p-10 rounded-2xl flex flex-col items-center text-center group hover:!bg-forest transition-all duration-500 cursor-pointer hover:-translate-y-2 block">
+                        class="glass-pill service-card p-10 rounded-2xl flex flex-col items-center text-center group hover:!bg-forest transition-all duration-500 cursor-pointer hover:-translate-y-2 block">
                         <div
                             class="w-16 h-16 rounded-full bg-forest/5 flex items-center justify-center mb-6 group-hover:bg-off-white/10 transition-colors">
                             <svg class="w-8 h-8 text-forest group-hover:text-off-white transition-colors" fill="none"
@@ -394,7 +417,7 @@
                     </a>
                     <!-- Service 2: Web Design -->
                     <a href="services.html#service-web-design"
-                        class="glass-pill p-10 rounded-2xl flex flex-col items-center text-center group hover:!bg-forest transition-all duration-500 cursor-pointer hover:-translate-y-2 md:-translate-y-4 md:hover:-translate-y-6 block">
+                        class="glass-pill service-card p-10 rounded-2xl flex flex-col items-center text-center group hover:!bg-forest transition-all duration-500 cursor-pointer hover:-translate-y-2 md:-translate-y-4 md:hover:-translate-y-6 block">
                         <div
                             class="w-16 h-16 rounded-full bg-forest/5 flex items-center justify-center mb-6 group-hover:bg-off-white/10 transition-colors">
                             <svg class="w-8 h-8 text-forest group-hover:text-off-white transition-colors" fill="none"
@@ -413,7 +436,7 @@
                     </a>
                     <!-- Service 3: Development -->
                     <a href="services.html#service-development"
-                        class="glass-pill p-10 rounded-2xl flex flex-col items-center text-center group hover:!bg-forest transition-all duration-500 cursor-pointer hover:-translate-y-2 block">
+                        class="glass-pill service-card p-10 rounded-2xl flex flex-col items-center text-center group hover:!bg-forest transition-all duration-500 cursor-pointer hover:-translate-y-2 block">
                         <div
                             class="w-16 h-16 rounded-full bg-forest/5 flex items-center justify-center mb-6 group-hover:bg-off-white/10 transition-colors">
                             <svg class="w-8 h-8 text-forest group-hover:text-off-white transition-colors" fill="none"
@@ -435,10 +458,10 @@
                 <div class="relative w-full overflow-hidden py-8 flex items-center">
                     <!-- Gradient Overlays for smooth edges -->
                     <div
-                        class="absolute left-0 top-0 w-24 md:w-48 h-full bg-gradient-to-r from-[#F3EDE3] to-transparent z-10 pointer-events-none">
+                        class="absolute left-0 top-0 w-24 md:w-48 h-full carousel-mask-left z-10 pointer-events-none">
                     </div>
                     <div
-                        class="absolute right-0 top-0 w-24 md:w-48 h-full bg-gradient-to-l from-[#F3EDE3] to-transparent z-10 pointer-events-none">
+                        class="absolute right-0 top-0 w-24 md:w-48 h-full carousel-mask-right z-10 pointer-events-none">
                     </div>
 
                     <div class="flex animate-carousel">
@@ -578,9 +601,9 @@
                     </div>
                     <div
                         class="flex flex-wrap justify-center gap-4 md:gap-8 text-xs uppercase tracking-[0.2em] font-bold text-cream/40">
-                        <a class="hover:text-cream" href="#">Instagram</a>
-                        <a class="hover:text-cream" href="#">LinkedIn</a>
-                        <a class="hover:text-cream" href="#">Twitter</a>
+                        <a class="social-link hover:text-cream inline-block transition-colors duration-300" href="#">Instagram</a>
+                        <a class="social-link hover:text-cream inline-block transition-colors duration-300" href="#">LinkedIn</a>
+                        <a class="social-link hover:text-cream inline-block transition-colors duration-300" href="#">Twitter</a>
                     </div>
                     <div class="text-[10px] uppercase tracking-widest text-cream/30">
                         © 2026 Flowiee . All rights reserved.
@@ -604,7 +627,7 @@
         // Plane Geometry for Waves
         const geometry = new THREE.PlaneGeometry(10, 10, 64, 64);
         const material = new THREE.MeshStandardMaterial({
-            color: document.documentElement.classList.contains('dark-theme') ? 0xB92EFF : 0x45644A,
+            color: document.documentElement.classList.contains('dark-theme') ? 0xD2B4DE : 0x45644A,
             wireframe: false,
             transparent: true,
             opacity: 0.15,
@@ -614,7 +637,7 @@
 
         // Listen for theme toggle to change color
         window.addEventListener('themeToggle', (e) => {
-            const targetHex = e.detail.isDark ? 0xB92EFF : 0x45644A;
+            const targetHex = e.detail.isDark ? 0xD2B4DE : 0x45644A;
             const targetColor = new THREE.Color(targetHex);
             gsap.to(material.color, {
                 r: targetColor.r,
@@ -719,7 +742,7 @@
             }
 
             // Apply text reveal animation to buttons
-            document.querySelectorAll('a.rounded-full').forEach(btn => {
+            document.querySelectorAll('a.rounded-full, .social-link').forEach(btn => {
                 const originalText = btn.innerText.trim();
                 btn.innerHTML = '';
                 

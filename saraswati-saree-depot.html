@@ -71,13 +71,18 @@
         }
 
         :root.dark-theme {
-            --color-forest: 185 46 255;  /* #B92EFF */
-            --color-sage: 180 113 219;   /* #B471DB */
+            --color-forest: 210 180 222;  /* #D2B4DE */
+            --color-sage: 210 180 222;  /* #D2B4DE */
             --color-cream: 26 26 26;     /* #1A1A1A */
             --color-off-white: 243 237 227; /* #F3EDE3 */
             --color-bg: #0a0a0a;
             --color-text: #FFFFFF;
         }
+
+        :root.dark-theme footer.bg-forest {
+            background-color: #452452;
+        }
+
 
         :root.dark-theme header img[alt="Flowiee Logo"] {
             filter: brightness(0) invert(1);
@@ -96,6 +101,24 @@
         h3,
         .serif-font {
             font-family: 'Playfair Display', serif;
+        }
+    
+        :root.dark-theme .liquid-button {
+            background: rgba(203, 46, 255, 0.9);
+        }
+        :root.dark-theme .liquid-button:hover {
+            background: rgba(203, 46, 255, 1);
+            box-shadow: 0 10px 20px rgba(203, 46, 255, 0.15);
+        }
+        :root.dark-theme .service-card:hover {
+            background-color: #CB2EFF !important;
+        }
+    
+        .carousel-mask-left {
+            background: linear-gradient(to right, var(--color-bg), transparent);
+        }
+        .carousel-mask-right {
+            background: linear-gradient(to left, var(--color-bg), transparent);
         }
     </style>
     <style data-purpose="glassmorphism">
@@ -376,9 +399,9 @@
                     </div>
                     <div
                         class="flex flex-wrap justify-center gap-4 md:gap-8 text-xs uppercase tracking-[0.2em] font-bold text-cream/40">
-                        <a class="hover:text-cream" href="#">Instagram</a>
-                        <a class="hover:text-cream" href="#">LinkedIn</a>
-                        <a class="hover:text-cream" href="#">Twitter</a>
+                        <a class="social-link hover:text-cream inline-block transition-colors duration-300" href="#">Instagram</a>
+                        <a class="social-link hover:text-cream inline-block transition-colors duration-300" href="#">LinkedIn</a>
+                        <a class="social-link hover:text-cream inline-block transition-colors duration-300" href="#">Twitter</a>
                     </div>
                     <div class="text-[10px] uppercase tracking-widest text-cream/30">
                         © 2026 Flowiee . All rights reserved.
@@ -402,7 +425,7 @@
         // Plane Geometry for Waves
         const geometry = new THREE.PlaneGeometry(10, 10, 64, 64);
         const material = new THREE.MeshStandardMaterial({
-            color: document.documentElement.classList.contains('dark-theme') ? 0xB92EFF : 0x45644A,
+            color: document.documentElement.classList.contains('dark-theme') ? 0xD2B4DE : 0x45644A,
             wireframe: false,
             transparent: true,
             opacity: 0.15,
@@ -473,7 +496,7 @@
         // Simple Entrance Animations with GSAP
         document.addEventListener('DOMContentLoaded', () => {
             // Apply text reveal animation to buttons
-            document.querySelectorAll('a.rounded-full').forEach(btn => {
+            document.querySelectorAll('a.rounded-full, .social-link').forEach(btn => {
                 const originalText = btn.innerText.trim();
                 btn.innerHTML = '';
                 
