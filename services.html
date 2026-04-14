@@ -71,34 +71,6 @@
             --color-text: #18442A;
         }
 
-        :root.dark-theme {
-            --color-forest: 210 180 222;  /* #D2B4DE */
-            --color-sage: 210 180 222;  /* #D2B4DE */
-            --color-cream: 26 26 26;     /* #1A1A1A */
-            --color-off-white: 243 237 227; /* #F3EDE3 */
-            --color-bg: #0a0a0a;
-            --color-text: #FFFFFF;
-        }
-
-        :root.dark-theme footer.bg-forest {
-            background-color: #452452;
-        }
-
-        :root.dark-theme footer .social-link,
-        :root.dark-theme footer .text-cream\/30,
-        :root.dark-theme footer .text-cream\/40 {
-            color: rgba(210, 180, 222, 0.4) !important;
-        }
-
-        :root.dark-theme footer .social-link:hover {
-            color: rgba(210, 180, 222, 0.9) !important;
-        }
-
-
-        :root.dark-theme header img[alt="Flowiee Logo"] {
-            filter: brightness(0) invert(1);
-        }
-
         body {
             background-color: var(--color-bg);
             color: var(--color-text);
@@ -112,17 +84,6 @@
         h3,
         .serif-font {
             font-family: 'Playfair Display', serif;
-        }
-    
-        :root.dark-theme .liquid-button {
-            background: rgba(203, 46, 255, 0.9);
-        }
-        :root.dark-theme .liquid-button:hover {
-            background: rgba(203, 46, 255, 1);
-            box-shadow: 0 10px 20px rgba(203, 46, 255, 0.15);
-        }
-        :root.dark-theme .service-card:hover {
-            background-color: #CB2EFF !important;
         }
     
         .carousel-mask-left {
@@ -143,11 +104,6 @@
             transition: background 0.5s, border 0.5s;
         }
         
-        :root.dark-theme .glass-pill {
-            background: rgba(26, 26, 26, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
         .liquid-button {
             background: rgb(var(--color-forest) / 0.9);
             backdrop-filter: blur(8px);
@@ -298,11 +254,6 @@
         ]
       }
     }
-    </script>
-    <script>
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark-theme');
-        }
     </script>
 </head>
 
@@ -617,7 +568,7 @@
         // Plane Geometry for Waves
         const geometry = new THREE.PlaneGeometry(10, 10, 64, 64);
         const material = new THREE.MeshStandardMaterial({
-            color: document.documentElement.classList.contains('dark-theme') ? 0xD2B4DE : 0x45644A,
+            color: 0x45644A,
             wireframe: false,
             transparent: true,
             opacity: 0.15,
